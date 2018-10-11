@@ -22,7 +22,7 @@ class BookCover extends React.Component{
 
 class BookShelfChanger extends React.Component{
 
-  changeShelf = (e) => {BooksAPI.update(this.props.book.id, e.target.value).then((data) => {console.log(data)})}
+  changeShelf = (e) => {BooksAPI.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
   render(){
     return (<div className="book-shelf-changer">
                               <select  onChange={this.changeShelf}>
