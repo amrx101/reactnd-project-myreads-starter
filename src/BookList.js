@@ -3,6 +3,8 @@ import Book from './Book'
 
 
 class BookList extends React.Component{
+    
+
 	render(){
 		   return (
         <div className="bookshelf">
@@ -13,7 +15,7 @@ class BookList extends React.Component{
                         .books
                         .map((book) => {
                             return <li key={book.id}>
-                                <Book book={book}/>
+                                <Book book={book} shift={this.props.parentMethod}/>
                             </li>
                         })
                       }

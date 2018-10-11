@@ -8,7 +8,9 @@ import './App.css'
 
 
 class BooksApp extends React.Component {
-  state = {
+  constructor(){
+    super();
+  this.state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -20,9 +22,10 @@ class BooksApp extends React.Component {
     currentlyReading: [],
     wantToRead: [],
     finishedReading: [],
-    showSearchPage: false,
-    abc: "abc"
+    showSearchPage: false
   }
+  this.someMethod = this.someMethod.bind(this)
+}
 
   componentDidMount() {
     this.getAllBooks()
@@ -34,21 +37,21 @@ class BooksApp extends React.Component {
   BooksAPI.getAll().then(
     function(data){
       self.setState({
-        currentlyReading: data.filter(book => book.shelf == "currentlyReading"),
-        wantToRead: data.filter(book => book.shelf == "wantToRead"),
-        finishedReading: data.filter(book => book.shelf == "read")
+        currentlyReading: data.filter(book => book.shelf === "currentlyReading"),
+        wantToRead: data.filter(book => book.shelf === "wantToRead"),
+        finishedReading: data.filter(book => book.shelf === "read")
       })
     }
   )
 }
 
 onUpdate(bookId, shelf){
-  console.log(this.state.abc)
   BooksAPI.update(bookId, shelf)
-  this.setState({abc: "not abc"})
-  console.log(this.state.abc)
-
   //sthis.getAllBooks()
+}
+
+someMethod(){
+  console.log("Bar")
 }
 
 
@@ -82,9 +85,9 @@ onUpdate(bookId, shelf){
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-              <BookList shelf="Currently Reading" books={this.state.currentlyReading}/>
-              <BookList shelf="Want to Read" books={this.state.wantToRead}/>
-              <BookList shelf="Read" books={this.state.finishedReading}/>
+              <BookList shelf="Currently Reading" books={this.state.currentlyReading} parentMethod={this.someMethod}/>
+              <BookList shelf="Want to Read" books={this.state.wantToRead} parentMethod={this.someMethod}/>
+              <BookList shelf="Read" books={this.state.finishedReading} parentMethod={this.someMethod}/>
             </div>
 
            
