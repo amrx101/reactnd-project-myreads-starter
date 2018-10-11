@@ -22,9 +22,10 @@ class BooksApp extends React.Component {
     currentlyReading: [],
     wantToRead: [],
     finishedReading: [],
-    showSearchPage: false
+    showSearchPage: false,
+    key: ""
   }
-  this.someMethod = this.someMethod.bind(this)
+  this.discover = this.discover.bind(this)
 }
 
   componentDidMount() {
@@ -47,13 +48,11 @@ class BooksApp extends React.Component {
 
 onUpdate(bookId, shelf){
   BooksAPI.update(bookId, shelf)
-  //sthis.getAllBooks()
 }
 
-someMethod(){
-  console.log("Bar")
-}
 
+setDiscovered =(data) => {this.setState({searchbooks:data})}
+discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
 
   render() {
     console.log(this.state)
@@ -73,7 +72,7 @@ someMethod(){
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"/>
+                <input type="text" placeholder="Search by title or author"  onChange={event => {this.discover(event.target.value)}}/>
 
               </div>
             </div>
