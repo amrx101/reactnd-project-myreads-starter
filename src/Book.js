@@ -15,7 +15,6 @@ class Title extends React.Component{
 
 class BookCover extends React.Component{
   render (){
-    console.log(this.props)
     return(<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.imageLinks.thumbnail})`}}></div>)
 
   }
@@ -23,10 +22,10 @@ class BookCover extends React.Component{
 
 class BookShelfChanger extends React.Component{
 
-  chaneShelf = (e) => {BooksAPI.update(this.props.bookId, e.target.value)}
+  changeShelf = (e) => {BooksAPI.update(this.props.bookId, e.target.value)}
   render(){
     return (<div className="book-shelf-changer">
-                              <select  onChange={this.chaneShelf}>
+                              <select  onChange={this.changeShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -39,9 +38,6 @@ class BookShelfChanger extends React.Component{
 }
 
 class Book extends React.Component{
-  // component that represents a Book on a shelf
-
-  click = () => {this.props.parentMethod()}
   render(){
     const book = this.props.book
     return (
