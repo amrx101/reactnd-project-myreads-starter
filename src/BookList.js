@@ -15,7 +15,7 @@ class BookList extends React.Component{
                         .books
                         .map((book) => {
                             return <li key={book.id}>
-                                <Book book={book} shift={this.props.parentMethod}/>
+                                <Book book={book}/>
                             </li>
                         })
                       }
