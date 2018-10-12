@@ -50,7 +50,7 @@ onUpdate(bookId, shelf){
   BooksAPI.update(bookId, shelf)
 }
 
-
+assignShelf= (data) => {console.log("TODO Assign Shelf for the searched books")}
 setDiscovered =(data) => {this.setState({searchbooks:data})}
 discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
 
