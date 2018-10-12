@@ -54,6 +54,9 @@ onUpdate(bookId, shelf){
 setDiscovered =(data) => {this.setState({searchbooks:data})}
 discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
 
+discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
+
+
   render() {
     console.log(this.state)
 
@@ -72,12 +75,12 @@ discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(dat
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"  onChange={event => {this.discover(event.target.value)}}/>
+                <input type="text" placeholder="Search by title or author"  onChange={event => {this.discover_new(event.target.value)}}/>
 
               </div>
             </div>
             <div className="search-books-results">
-              <ol className="books-grid"></ol>
+            <BookList shelf="Search Result" books={this.state.searchbooks}/>
             </div>
           </div>
         ) : (
