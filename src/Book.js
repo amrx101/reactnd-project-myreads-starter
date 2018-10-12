@@ -25,8 +25,9 @@ class BookShelfChanger extends React.Component{
   changeShelf = (e) => {BooksAPI.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
   render(){
     return (<div className="book-shelf-changer">
-                              <select  onChange={this.changeShelf}>
-                                <option value="move" enabled>Move to...</option>
+                              
+                              <select value={this.props.shelf}  onChange={this.changeShelf}>
+                                <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
