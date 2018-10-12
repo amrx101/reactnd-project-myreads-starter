@@ -26,7 +26,7 @@ class BookShelfChanger extends React.Component{
   render(){
     return (<div className="book-shelf-changer">
                               
-                              <select value={this.props.shelf}  onChange={this.changeShelf}>
+                              <select value={this.props.shelf}>  onChange={this.changeShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -44,7 +44,8 @@ class Book extends React.Component{
     return (
       <div className="book">
         <div className="book-top">
-            <BookCover imageLinks={book.imageLinks}/>
+        {book.imageLinks ?(
+            <BookCover imageLinks={book.imageLinks}/>):(<BookCover imageLinks={""}/>)}
             <BookShelfChanger shelf={book.shelf} book={book}/>
         </div>
         <Title title={book.title}/>
