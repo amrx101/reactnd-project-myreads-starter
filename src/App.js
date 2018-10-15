@@ -29,15 +29,24 @@ class BooksApp extends React.Component {
   }
 
 
-  getAllBooks() {
-  let self = this;
-  BooksAPI.getAll().then(
-    function(data){
-      self.setState({
-       books: data
+//   getAllBooks() {
+//   let self = this;
+//   BooksAPI.getAll().then(
+//     function(data){
+//       self.setState({
+//        books: data
+//       })
+//     }
+//   )
+// }
+
+getAllBooks(){
+  BooksAPI.getAll()
+    .then((data) => {
+      this.setState({
+        books:data
       })
-    }
-  )
+    })
 }
 
 onUpdate(bookId, shelf){
