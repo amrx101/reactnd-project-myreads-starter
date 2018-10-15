@@ -53,8 +53,19 @@ onUpdate(bookId, shelf){
   BooksAPI.update(bookId, shelf)
 }
 
-assignShelf= (data) => {console.log("TODO Assign Shelf for the searched books")}
-setDiscovered =(data) => {this.setState({searchbooks:data})}
+assign(data){
+  if (data === undefined || data.error !== undefined){
+    return []
+  }
+  let shelfBooks = this.state.books
+  let ids = shelfBooks.map(book => book.id)
+  let C = data.filter(a => !ids.includes(a.id))
+  C.forEach(function(obj) { obj.shelf = "none"; });
+  return C.concat(shelfBooks)
+
+}
+
+setDiscovered =(data) => {this.setState({searchbooks:this.assign(data)})}
 discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
 discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
 
