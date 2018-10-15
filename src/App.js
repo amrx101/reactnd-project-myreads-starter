@@ -60,7 +60,8 @@ assign(data){
   let shelfBooks = this.state.books
   let ids = shelfBooks.map(book => book.id)
   let C = data.filter(a => !ids.includes(a.id))
-  C.forEach(function(obj) { obj.shelf = "none"; });
+  C.forEach((obj => { obj.shelf = "none"; }))
+
   return C.concat(shelfBooks)
 
 }
@@ -71,8 +72,6 @@ discover_new = (query) => (query !== undefined) ? this.discover(query):this.setD
 
 
   render() {
-    console.log(this.state)
-
     return (
       <div className="app">
         {this.state.showSearchPage ? (
