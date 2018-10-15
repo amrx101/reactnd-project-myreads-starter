@@ -24,17 +24,17 @@ class BookShelfChanger extends React.Component{
 
   changeShelf = (e) => {BooksAPI.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
   render(){
-    return (<div className="book-shelf-changer">
-                              
-                              <select value={this.props.shelf} onChange={this.changeShelf}>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          )
+    return (
+      <div className="book-shelf-changer"> 
+        <select value={this.props.shelf} onChange={this.changeShelf}>
+          <option value="move" disabled>Move to...</option>
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+    )
   }
 }
 
@@ -45,8 +45,8 @@ class Book extends React.Component{
       <div className="book">
         <div className="book-top">
         {book.imageLinks ?(
-            <BookCover imageLinks={book.imageLinks}/>):(<BookCover imageLinks={""}/>)}
-            <BookShelfChanger shelf={book.shelf} book={book}/>
+          <BookCover imageLinks={book.imageLinks}/>):(<BookCover imageLinks={""}/>)}
+          <BookShelfChanger shelf={book.shelf} book={book}/>
         </div>
         <Title title={book.title}/>
         <Authors authors={book.author}/>
