@@ -19,9 +19,9 @@ class BooksApp extends React.Component {
      */
     books: [],
     searchbooks: [],
-    currentlyReading: [],
-    wantToRead: [],
-    finishedReading: [],
+    // currentlyReading: [],
+    // wantToRead: [],
+    // finishedReading: [],
     showSearchPage: false,
     key: ""
   }
@@ -38,9 +38,7 @@ class BooksApp extends React.Component {
   BooksAPI.getAll().then(
     function(data){
       self.setState({
-        currentlyReading: data.filter(book => book.shelf === "currentlyReading"),
-        wantToRead: data.filter(book => book.shelf === "wantToRead"),
-        finishedReading: data.filter(book => book.shelf === "read")
+       books: data
       })
     }
   )
@@ -53,7 +51,6 @@ onUpdate(bookId, shelf){
 assignShelf= (data) => {console.log("TODO Assign Shelf for the searched books")}
 setDiscovered =(data) => {this.setState({searchbooks:data})}
 discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
-
 discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
 
 
@@ -87,9 +84,9 @@ discover_new = (query) => (query !== undefined) ? this.discover(query):this.setD
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-              <BookList shelf="Currently Reading" books={this.state.currentlyReading} parentMethod={this.someMethod}/>
-              <BookList shelf="Want to Read" books={this.state.wantToRead} parentMethod={this.someMethod}/>
-              <BookList shelf="Read" books={this.state.finishedReading} parentMethod={this.someMethod}/>
+              <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")} parentMethod={this.someMethod}/>
+              <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")} parentMethod={this.someMethod}/>
+              <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")} parentMethod={this.someMethod}/>
             </div>
 
            
