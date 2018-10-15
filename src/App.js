@@ -3,10 +3,6 @@ import * as BooksAPI from './BooksAPI'
 import BookList from './BookList'
 import './App.css'
 
-
-
-
-
 class BooksApp extends React.Component {
   state = {
     /**
@@ -21,7 +17,6 @@ class BooksApp extends React.Component {
     // wantToRead: [],
     // finishedReading: [],
     showSearchPage: false,
-    key: ""
   }
 
   componentDidMount() {
@@ -29,46 +24,36 @@ class BooksApp extends React.Component {
   }
 
 
-//   getAllBooks() {
-//   let self = this;
-//   BooksAPI.getAll().then(
-//     function(data){
-//       self.setState({
-//        books: data
-//       })
-//     }
-//   )
-// }
 
-getAllBooks(){
-  BooksAPI.getAll()
-    .then((data) => {
-      this.setState({
-        books:data
+  getAllBooks(){
+    BooksAPI.getAll()
+      .then((data) => {
+        this.setState({
+          books:data
+        })
       })
-    })
-}
-
-onUpdate(bookId, shelf){
-  BooksAPI.update(bookId, shelf)
-}
-
-assign(data){
-  if (data === undefined || data.error !== undefined){
-    return []
   }
-  let shelfBooks = this.state.books
-  let ids = shelfBooks.map(book => book.id)
-  let C = data.filter(a => !ids.includes(a.id))
-  C.forEach((obj => { obj.shelf = "none"; }))
 
-  return C.concat(shelfBooks)
+  onUpdate(bookId, shelf){
+    BooksAPI.update(bookId, shelf)
+  }
 
-}
+  assign(data){
+    if (data === undefined || data.error !== undefined){
+      return []
+    }
+    let shelfBooks = this.state.books
+    let ids = shelfBooks.map(book => book.id)
+    let C = data.filter(a => !ids.includes(a.id))
+    C.forEach((obj => { obj.shelf = "none"; }))
 
-setDiscovered =(data) => {this.setState({searchbooks:this.assign(data)})}
-discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
-discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
+    return C.concat(shelfBooks)
+
+  }
+
+  setDiscovered =(data) => {this.setState({searchbooks:this.assign(data)})}
+  discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
+  discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
 
 
   render() {
