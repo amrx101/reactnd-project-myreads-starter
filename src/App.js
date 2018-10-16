@@ -2,28 +2,18 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import BookList from './BookList'
 import './App.css'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: [],
     searchbooks: [],
-    // currentlyReading: [],
-    // wantToRead: [],
-    // finishedReading: [],
-    showSearchPage: false,
   }
 
   componentDidMount() {
     this.getAllBooks()
   }
-
-
 
   getAllBooks(){
     BooksAPI.getAll()
@@ -55,14 +45,50 @@ class BooksApp extends React.Component {
   discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
   discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
 
+  // render() {
+  //   return (
+  //     <div>
+  //       <Route exact path='/' render={() => (
+  //         <ListContacts
+  //           contacts={this.state.contacts}
+  //           onDeleteContact={this.removeContact}
+  //         />
+  //       )} />
+  //       <Route path='/create' component={CreateContact} />
+  //     </div>
+  //   )
+  // }
 
-  render() {
-    return (
-      <div className="app">
-        {this.state.showSearchPage ? (
+  render(){
+    return(
+      <div>
+        <Route exact path="/" render={() => (
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+              <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")}/>
+              <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")}/>
+              <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")}/>
+            </div>
+
+            <div className="open-search">
+              <Link
+                to='/search'
+                className="open-search"
+                >Add a Book </Link>
+            </div>
+          </div>
+        )} />
+
+        <Route path="/search" render={() =>(
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <Link
+                className="close-search"
+                to="/">
+                Close
+              </Link>
+
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -73,34 +99,20 @@ class BooksApp extends React.Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input type="text" placeholder="Search by title or author"  onChange={event => {this.discover_new(event.target.value)}}/>
-
               </div>
             </div>
             <div className="search-books-results">
             <BookList shelf="Search Result" books={this.state.searchbooks}/>
             </div>
           </div>
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-              <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")} parentMethod={this.someMethod}/>
-              <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")} parentMethod={this.someMethod}/>
-              <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")} parentMethod={this.someMethod}/>
-            </div>
+        )} />
 
-           
-                           
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            <div>
-          </div>
-          </div>
-          </div>
-        )}
       </div>
     )
   }
 }
+
+
+  
 
 export default BooksApp
