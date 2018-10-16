@@ -25,41 +25,6 @@ class BooksApp extends React.Component {
       })
   }
 
-  onUpdate(bookId, shelf){
-    BooksAPI.update(bookId, shelf)
-  }
-
-  assign(data){
-    if (data === undefined || data.error !== undefined){
-      return []
-    }
-    let shelfBooks = this.state.books
-    let ids = shelfBooks.map(book => book.id)
-    let C = data.filter(a => !ids.includes(a.id))
-    C.forEach((obj => { obj.shelf = "none"; }))
-
-    return C.concat(shelfBooks)
-
-  }
-
-  setDiscovered =(data) => {this.setState({searchbooks:this.assign(data)})}
-  discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
-  discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <Route exact path='/' render={() => (
-  //         <ListContacts
-  //           contacts={this.state.contacts}
-  //           onDeleteContact={this.removeContact}
-  //         />
-  //       )} />
-  //       <Route path='/create' component={CreateContact} />
-  //     </div>
-  //   )
-  // }
-
   render(){
     return(
       <div>
