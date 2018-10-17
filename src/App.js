@@ -25,6 +25,11 @@ class BooksApp extends React.Component {
       })
   }
 
+  update(Book, shelf){
+    console.log("HAIYA")
+    BooksAPI.update(Book, shelf)
+  }
+
   render(){
     return(
       <div>
@@ -32,7 +37,7 @@ class BooksApp extends React.Component {
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-              <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")}/>
+              <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")} update={this.update}/>
               <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")}/>
               <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")}/>
             </div>

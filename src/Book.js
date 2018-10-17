@@ -22,7 +22,12 @@ class BookCover extends React.Component{
 
 class BookShelfChanger extends React.Component{
 
-  changeShelf = (e) => {BooksAPI.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
+  constructor(props) {
+    super(props);
+    this.state = { book: props.book };
+  }
+
+  changeShelf = (e) => {this.props.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
   render(){
     return (
       <div className="book-shelf-changer"> 
@@ -46,7 +51,7 @@ class Book extends React.Component{
         <div className="book-top">
         {book.imageLinks ?(
           <BookCover imageLinks={book.imageLinks}/>):(<BookCover imageLinks={""}/>)}
-          <BookShelfChanger shelf={book.shelf} book={book}/>
+          <BookShelfChanger shelf={book.shelf} book={book} update={this.props.update}/>
         </div>
         <Title title={book.title}/>
         <Authors authors={book.author}/>
