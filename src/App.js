@@ -9,7 +9,6 @@ import Search from './Search'
 class BooksApp extends React.Component {
   state = {
     books: [],
-    searchbooks: [],
   }
 
   componentDidMount() {
@@ -29,6 +28,7 @@ class BooksApp extends React.Component {
     console.log("HAIYA")
     BooksAPI.update(Book, shelf)
   }
+
 
   render(){
     return(
@@ -51,7 +51,11 @@ class BooksApp extends React.Component {
           </div>
         )} />
 
-        <Route path="/search" component={Search}/>
+        <Route
+          path="/search"
+          render={(props) => <Search {...props} shelfBooks={this.state.books} />}
+        />
+       
 
       </div>
     )

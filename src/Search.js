@@ -14,7 +14,7 @@ class Search extends React.Component{
 	    if (data === undefined || data.error !== undefined){
 	      return []
 	    }
-	    let shelfBooks = this.state.books
+	    let shelfBooks = this.props.shelfBooks
 	    let ids = shelfBooks.map(book => book.id)
 	    let C = data.filter(a => !ids.includes(a.id))
 	    C.forEach((obj => { obj.shelf = "none"; }))

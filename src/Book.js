@@ -25,9 +25,7 @@ class BookShelfChanger extends React.Component{
   constructor(props){
     super(props);
   }
-
-
-  changeShelf = (e) => {this.props.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
+  
   render(){
     console.log(this.props)
     return (
