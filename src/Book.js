@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 
 class Authors extends React.Component{
   render (){
@@ -27,7 +26,6 @@ class BookShelfChanger extends React.Component{
   }
   
   render(){
-    console.log(this.props)
     return (
       <div className="book-shelf-changer"> 
         <select value={this.props.shelf} onChange={(e) => this.props.update(this.props.book, e.target.value)}>

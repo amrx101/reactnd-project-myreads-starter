@@ -49,7 +49,7 @@ class Search extends React.Component{
               </div>
             </div>
             <div className="search-books-results">
-            <BookList shelf="Search Result" books={this.state.books}/>
+            <BookList shelf="Search Result" books={this.state.books} update={this.props.update}/>
             </div>
           </div>
   			

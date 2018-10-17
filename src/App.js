@@ -7,8 +7,10 @@ import { Route } from 'react-router-dom'
 import Search from './Search'
 
 class BooksApp extends React.Component {
-  state = {
-    books: [],
+  constructor(props){
+    super(props);
+    this.state = {books: []};
+    this.update = this.update.bind(this)
   }
 
   componentDidMount() {
@@ -25,8 +27,7 @@ class BooksApp extends React.Component {
   }
 
   update(Book, shelf){
-    console.log("HAIYA")
-    BooksAPI.update(Book, shelf)
+    BooksAPI.update(Book, shelf).then(this.getAllBooks())
   }
 
 
@@ -53,7 +54,7 @@ class BooksApp extends React.Component {
 
         <Route
           path="/search"
-          render={(props) => <Search {...props} shelfBooks={this.state.books} />}
+          render={(props) => <Search {...props} shelfBooks={this.state.books} update={this.update} />}
         />
        
 
