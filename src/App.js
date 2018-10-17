@@ -38,8 +38,8 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
               <BookList shelf="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")} update={this.update}/>
-              <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")}/>
-              <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")}/>
+              <BookList shelf="Want to Read" books={this.state.books.filter(book => book.shelf==="wantToRead")} update={this.update}/>
+              <BookList shelf="Read" books={this.state.books.filter(book => book.shelf === "read")} update={this.update}/>
             </div>
 
             <div className="open-search">

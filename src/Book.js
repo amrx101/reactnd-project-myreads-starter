@@ -22,16 +22,17 @@ class BookCover extends React.Component{
 
 class BookShelfChanger extends React.Component{
 
-  constructor(props) {
-    super(props);
-    this.state = { book: props.book };
+  constructor(props){
+    super(props)
   }
+
 
   changeShelf = (e) => {this.props.update(this.props.book, e.target.value).then((data) => {console.log(data)})}
   render(){
+    console.log(this.props)
     return (
       <div className="book-shelf-changer"> 
-        <select value={this.props.shelf} onChange={this.changeShelf}>
+        <select value={this.props.shelf} onChange={(e) => this.props.update(this.props.book, e.target.value)}>
           <option value="move" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
