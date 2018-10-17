@@ -26,7 +26,7 @@ class BookList extends React.Component{
                         .books
                         .map((book) => {
                             return <li key={book.id}>
-                                <Book book={book}/>
+                                <Book book={book} update={this.props.update}/>
                             </li>
                         })
                       }

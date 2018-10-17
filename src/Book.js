@@ -23,7 +23,7 @@ class BookCover extends React.Component{
 class BookShelfChanger extends React.Component{
 
   constructor(props){
-    super(props)
+    super(props);
   }
 
 
