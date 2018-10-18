@@ -11,6 +11,7 @@ class BooksApp extends React.Component {
     super(props);
     this.state = {books: []};
     this.update = this.update.bind(this)
+    this.getAllBooks = this.getAllBooks.bind(this)
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class BooksApp extends React.Component {
   }
 
   update(Book, shelf){
-    BooksAPI.update(Book, shelf).then(this.getAllBooks())
+    BooksAPI.update(Book, shelf).then(this.getAllBooks)
   }
 
 
