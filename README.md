@@ -1,6 +1,14 @@
 # MyReads Project
 
-Submission for UDACITY React Nanodegree.
+Submission for UDACITY React Nanodegree. This application lets one retrieve and classify the books. Functionalites include:
+
+* categorise books into shelfs.
+* move books from one shelf to another.
+* search for books in the store.
+
+Use the app to create and track a healthy reading habit.
+
+
 
 ## TL;DR
 
