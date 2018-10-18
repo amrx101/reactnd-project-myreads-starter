@@ -16,15 +16,15 @@ class Search extends React.Component{
 	    }
 	    let shelfBooks = this.props.shelfBooks
 	    let ids = shelfBooks.map(book => book.id)
-	    let C = data.filter(a => !ids.includes(a.id))
-	    C.forEach((obj => { obj.shelf = "none"; }))
+	    let discoveredBooks = data.filter(a => !ids.includes(a.id))
+	    discoveredBooks.forEach((obj => { obj.shelf = "none"; }))
 
-	    return C.concat(shelfBooks)
+	    return discoveredBooks.concat(shelfBooks)
 	}
 
 	setDiscovered =(data) => {this.setState({books:this.assign(data)})}
-  	discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
-  	discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
+	discover = (query) =>{BooksAPI.search(query).then(data => this.setDiscovered(data))}
+	discover_new = (query) => (query !== undefined) ? this.discover(query):this.setDiscovered([])
 
   	render(){
   		return(
